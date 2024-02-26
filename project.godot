@@ -11,12 +11,12 @@ config_version=5
 [application]
 
 config/name="Orbitorium"
-config/description=" A program that simulates orbit physics of celestial bodies
+config/description=" 
+
 "
-config/version="0.1.0"
+config/version="1.0.0"
 run/main_scene="res://assets/scenes/Planetarium.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
-boot_splash/fullsize=false
 config/icon="res://assets/icons/icon.svg"
 
 [display]
