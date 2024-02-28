@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class Planet : RigidBody3D
+public partial class L2_Planet : RigidBody3D
 {
 	private RigidBody3D Sun;
 	// Called when the node enters the scene tree for the first time.

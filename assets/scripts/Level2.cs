@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class Planetarium : Node3D
+public partial class Level2: Node3D
 {
 	private Camera3D camera;
 	// Called when the node enters the scene tree for the first time.

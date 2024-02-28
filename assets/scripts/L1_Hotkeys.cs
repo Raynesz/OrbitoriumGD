@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class Hotkeys : Godot.Label
+public partial class L1_Hotkeys : Godot.Label
 {
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()

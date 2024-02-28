@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class Sun : RigidBody3D
+public partial class L2_Sun : RigidBody3D
 {
 	private Vector3 orbitCenter = new Vector3(0, 0, 0);  // Center of the orbit
 	private float orbitRadius = 15.0f;  // Radius of the orbit

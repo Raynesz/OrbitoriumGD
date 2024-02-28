@@ -1,10 +1,10 @@
 [gd_scene load_steps=18 format=3 uid="uid://kndkrc3vy01x"]
 
-[ext_resource type="Script" path="res://assets/scripts/Planetarium.cs" id="1_5k4ip"]
-[ext_resource type="Script" path="res://assets/scripts/Camera3D.gd" id="1_av27a"]
-[ext_resource type="Script" path="res://assets/scripts/Planet.cs" id="1_wn477"]
-[ext_resource type="Script" path="res://assets/scripts/Sun.cs" id="3_2ji60"]
-[ext_resource type="Script" path="res://assets/scripts/Hotkeys.cs" id="5_0hnrh"]
+[ext_resource type="Script" path="res://assets/scripts/Level2.cs" id="1_bh1fv"]
+[ext_resource type="Script" path="res://assets/scripts/L2_Planet.cs" id="2_2tchh"]
+[ext_resource type="Script" path="res://assets/scripts/Camera3D.gd" id="3_5i3wn"]
+[ext_resource type="Script" path="res://assets/scripts/L2_Sun.cs" id="4_ficcn"]
+[ext_resource type="Script" path="res://assets/scripts/L2_Hotkeys.cs" id="5_rjhp1"]
 
 [sub_resource type="Environment" id="Environment_np0fn"]
 ambient_light_source = 2
@@ -44,7 +44,7 @@ emission = Color(1, 1, 1, 1)
 font_size = 21
 
 [node name="Node3D" type="Node3D"]
-script = ExtResource("1_5k4ip")
+script = ExtResource("1_bh1fv")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_np0fn")
@@ -54,7 +54,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.76438, 0)
 collision_layer = 2
 collision_mask = 2
 gravity_scale = 0.0
-script = ExtResource("1_wn477")
+script = ExtResource("2_2tchh")
 
 [node name="MarsMesh" type="MeshInstance3D" parent="WorldEnvironment/MarsRigidBody3D"]
 mesh = SubResource("SphereMesh_kshva")
@@ -67,12 +67,12 @@ shape = SubResource("SphereShape3D_tbcmd")
 [node name="FreeLookCamera" type="Camera3D" parent="WorldEnvironment"]
 current = true
 fov = 87.3299
-script = ExtResource("1_av27a")
+script = ExtResource("3_5i3wn")
 
 [node name="EarthRigidBody3D" type="RigidBody3D" parent="WorldEnvironment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00557327, 0.0576704, 0.093904)
 gravity_scale = 0.0
-script = ExtResource("1_wn477")
+script = ExtResource("2_2tchh")
 
 [node name="EarthMesh" type="MeshInstance3D" parent="WorldEnvironment/EarthRigidBody3D"]
 mesh = SubResource("SphereMesh_eqkey")
@@ -87,7 +87,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 0)
 collision_layer = 3
 collision_mask = 3
 constant_force = Vector3(2, 0, 2)
-script = ExtResource("3_2ji60")
+script = ExtResource("4_ficcn")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="WorldEnvironment/SunRigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 0.92404, 0.382296, 0, -0.382296, 0.92404, 0, 0, 0)
@@ -120,4 +120,4 @@ text = "Hotkeys:
 [U]  Toggle UI
 [Esc]  Quit Application"
 label_settings = SubResource("LabelSettings_gxnkb")
-script = ExtResource("5_0hnrh")
+script = ExtResource("5_rjhp1")
