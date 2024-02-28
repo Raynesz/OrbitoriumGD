@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://kndkrc3vy01x"]
+[gd_scene load_steps=18 format=3 uid="uid://kndkrc3vy01x"]
 
 [ext_resource type="Script" path="res://assets/scripts/Planetarium.cs" id="1_5k4ip"]
 [ext_resource type="Script" path="res://assets/scripts/Camera3D.gd" id="1_av27a"]
 [ext_resource type="Script" path="res://assets/scripts/Planet.cs" id="1_wn477"]
 [ext_resource type="Script" path="res://assets/scripts/Sun.cs" id="3_2ji60"]
+[ext_resource type="Script" path="res://assets/scripts/Hotkeys.cs" id="5_0hnrh"]
 
 [sub_resource type="Environment" id="Environment_np0fn"]
 ambient_light_source = 2
@@ -14,6 +15,7 @@ ambient_light_energy = 0.94
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qqcb7"]
 albedo_color = Color(1, 0, 0, 1)
+emission = Color(0.301961, 0.301961, 0.301961, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_tbcmd"]
 
@@ -33,6 +35,13 @@ emission = Color(0.862745, 1, 0, 1)
 emission_energy_multiplier = 1.72
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_cp8wq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ppq01"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_gxnkb"]
+font_size = 21
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_5k4ip")
@@ -56,8 +65,8 @@ surface_material_override/0 = SubResource("StandardMaterial3D_qqcb7")
 shape = SubResource("SphereShape3D_tbcmd")
 
 [node name="FreeLookCamera" type="Camera3D" parent="WorldEnvironment"]
-transform = Transform3D(0.784885, -0.131939, 0.605432, 0, 0.977068, 0.212928, -0.619642, -0.167124, 0.766886, 18.9365, 2.64106, 23.6648)
 current = true
+fov = 87.3299
 script = ExtResource("1_av27a")
 
 [node name="EarthRigidBody3D" type="RigidBody3D" parent="WorldEnvironment"]
@@ -74,7 +83,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_38l72")
 shape = SubResource("SphereShape3D_0f5hu")
 
 [node name="SunRigidBody3D" type="RigidBody3D" parent="WorldEnvironment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.2564, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 0)
 collision_layer = 3
 collision_mask = 3
 constant_force = Vector3(2, 0, 2)
@@ -93,3 +102,22 @@ surface_material_override/0 = SubResource("StandardMaterial3D_loxjp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/SunRigidBody3D"]
 shape = SubResource("SphereShape3D_cp8wq")
+
+[node name="CSGTorus3D" type="CSGTorus3D" parent="WorldEnvironment"]
+material_override = SubResource("StandardMaterial3D_ppq01")
+inner_radius = 15.0
+outer_radius = 15.1
+sides = 64
+ring_sides = 10
+
+[node name="Hotkeys" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Hotkeys: 
+[X]  X-axis Camera View
+[Y]  Y-axis Camera View
+[F]  Default Camera View
+[U]  Toggle UI
+[Esc]  Quit Application"
+label_settings = SubResource("LabelSettings_gxnkb")
+script = ExtResource("5_0hnrh")

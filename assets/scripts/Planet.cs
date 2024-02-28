@@ -22,6 +22,6 @@ public partial class Planet : RigidBody3D
 	public override void _Process(double delta)
 	{
 		Vector3 SunGravity = Sun.Position - this.Position;
-		this.ApplyCentralForce(3*SunGravity);
+		this.ApplyCentralForce(30*SunGravity.Normalized());
 	}
 }

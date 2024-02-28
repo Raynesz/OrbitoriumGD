@@ -1,6 +1,6 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orbit Sim", "Orbit Sim.csproj", "{0D78132A-9E22-4E0A-8A7E-FCAF925093CA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrbitoriumGD", "OrbitoriumGD.csproj", "{0D78132A-9E22-4E0A-8A7E-FCAF925093CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
