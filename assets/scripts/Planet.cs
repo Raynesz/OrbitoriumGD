@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class L2_Planet : RigidBody3D
+public partial class Planet : RigidBody3D
 {
 	private RigidBody3D Sun;
 	// Called when the node enters the scene tree for the first time.
@@ -8,9 +8,9 @@ public partial class L2_Planet : RigidBody3D
 	{
 		var random = new RandomNumberGenerator();
 		random.Randomize();
-		int randomRadius = random.RandiRange(10, 20);
+		int randomRadius = random.RandiRange(20, 30);
 		int randomAngle = random.RandiRange(1, 360);
-		var randomY = random.RandiRange(0, 7);
+		var randomY = random.RandiRange(5, 20);
 		var randomX = randomRadius * Mathf.Cos(randomAngle);
 		var randomZ = randomRadius * Mathf.Sin(randomAngle);
 		

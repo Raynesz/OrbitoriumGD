@@ -1,10 +1,9 @@
 [gd_scene load_steps=18 format=3 uid="uid://kndkrc3vy01x"]
 
-[ext_resource type="Script" path="res://assets/scripts/Level2.cs" id="1_bh1fv"]
-[ext_resource type="Script" path="res://assets/scripts/L2_Planet.cs" id="2_2tchh"]
-[ext_resource type="Script" path="res://assets/scripts/Camera3D.gd" id="3_5i3wn"]
-[ext_resource type="Script" path="res://assets/scripts/L2_Sun.cs" id="4_ficcn"]
-[ext_resource type="Script" path="res://assets/scripts/L2_Hotkeys.cs" id="5_rjhp1"]
+[ext_resource type="Script" path="res://assets/scripts/Scene.cs" id="1_fvv8t"]
+[ext_resource type="Script" path="res://assets/scripts/Planet.cs" id="2_uvojm"]
+[ext_resource type="Script" path="res://assets/scripts/Sun_S2.cs" id="3_mw2l8"]
+[ext_resource type="Script" path="res://assets/scripts/FreeLookCamera.cs" id="4_law4i"]
 
 [sub_resource type="Environment" id="Environment_np0fn"]
 ambient_light_source = 2
@@ -36,15 +35,17 @@ emission_energy_multiplier = 1.72
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_cp8wq"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ppq01"]
+[sub_resource type="CylinderMesh" id="CylinderMesh_hpkbk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ds5p0"]
 emission_enabled = true
-emission = Color(1, 1, 1, 1)
+emission = Color(0.756863, 0.756863, 0.756863, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_gxnkb"]
 font_size = 21
 
 [node name="Node3D" type="Node3D"]
-script = ExtResource("1_bh1fv")
+script = ExtResource("1_fvv8t")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_np0fn")
@@ -54,7 +55,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.76438, 0)
 collision_layer = 2
 collision_mask = 2
 gravity_scale = 0.0
-script = ExtResource("2_2tchh")
+script = ExtResource("2_uvojm")
 
 [node name="MarsMesh" type="MeshInstance3D" parent="WorldEnvironment/MarsRigidBody3D"]
 mesh = SubResource("SphereMesh_kshva")
@@ -64,30 +65,31 @@ surface_material_override/0 = SubResource("StandardMaterial3D_qqcb7")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/MarsRigidBody3D"]
 shape = SubResource("SphereShape3D_tbcmd")
 
-[node name="FreeLookCamera" type="Camera3D" parent="WorldEnvironment"]
-current = true
-fov = 87.3299
-script = ExtResource("3_5i3wn")
-
 [node name="EarthRigidBody3D" type="RigidBody3D" parent="WorldEnvironment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00557327, 0.0576704, 0.093904)
 gravity_scale = 0.0
-script = ExtResource("2_2tchh")
+script = ExtResource("2_uvojm")
 
 [node name="EarthMesh" type="MeshInstance3D" parent="WorldEnvironment/EarthRigidBody3D"]
 mesh = SubResource("SphereMesh_eqkey")
-skeleton = NodePath("../../FreeLookCamera")
+skeleton = NodePath("../../SunRigidBody3D/FreeLookCamera")
 surface_material_override/0 = SubResource("StandardMaterial3D_38l72")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/EarthRigidBody3D"]
 shape = SubResource("SphereShape3D_0f5hu")
 
 [node name="SunRigidBody3D" type="RigidBody3D" parent="WorldEnvironment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 0)
-collision_layer = 3
-collision_mask = 3
+collision_layer = 0
+collision_mask = 0
+gravity_scale = 0.0
 constant_force = Vector3(2, 0, 2)
-script = ExtResource("4_ficcn")
+script = ExtResource("3_mw2l8")
+
+[node name="FreeLookCamera" type="Camera3D" parent="WorldEnvironment/SunRigidBody3D"]
+transform = Transform3D(0.40833, -0.0954172, 0.907834, 0, 0.994522, 0.104528, -0.912834, -0.0426822, 0.406094, 25.4059, 5.19602, 12.1585)
+current = true
+fov = 87.3299
+script = ExtResource("4_law4i")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="WorldEnvironment/SunRigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 0.92404, 0.382296, 0, -0.382296, 0.92404, 0, 0, 0)
@@ -96,6 +98,7 @@ omni_range = 4096.0
 omni_attenuation = 0.0228763
 
 [node name="SunMesh" type="MeshInstance3D" parent="WorldEnvironment/SunRigidBody3D"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 mesh = SubResource("SphereMesh_4lbi6")
 skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_loxjp")
@@ -103,21 +106,35 @@ surface_material_override/0 = SubResource("StandardMaterial3D_loxjp")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/SunRigidBody3D"]
 shape = SubResource("SphereShape3D_cp8wq")
 
-[node name="CSGTorus3D" type="CSGTorus3D" parent="WorldEnvironment"]
-material_override = SubResource("StandardMaterial3D_ppq01")
-inner_radius = 15.0
-outer_radius = 15.1
-sides = 64
-ring_sides = 10
+[node name="SunTrajectory" type="MeshInstance3D" parent="WorldEnvironment/SunRigidBody3D"]
+transform = Transform3D(-4.37114e-09, -1000, 0, 0.1, -4.37114e-05, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_hpkbk")
+surface_material_override/0 = SubResource("StandardMaterial3D_ds5p0")
 
-[node name="Hotkeys" type="Label" parent="."]
+[node name="Controls" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 23.0
-text = "Hotkeys: 
+text = "Controls: 
 [X]  X-axis Camera View
 [Y]  Y-axis Camera View
 [F]  Default Camera View
-[U]  Toggle UI
-[Esc]  Quit Application"
+[U]  Toggle Controls
+[Esc]  Quit Application
+
+[W, A, S, D, Q, E] Move around
+[Right Click] Look around
+[Scroll Wheel] Adjust camera speed
+
+[1] Select Scene 1
+[2] Select Scene 2"
 label_settings = SubResource("LabelSettings_gxnkb")
-script = ExtResource("5_rjhp1")
+
+[node name="Scene Title" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -142.5
+offset_right = 142.5
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Scene 2 - Sun moves in a straight line"
