@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://kndkrc3vy01x"]
+[gd_scene load_steps=19 format=3 uid="uid://kndkrc3vy01x"]
 
 [ext_resource type="Script" path="res://assets/scripts/Scene.cs" id="1_fvv8t"]
 [ext_resource type="Script" path="res://assets/scripts/Planet.cs" id="2_uvojm"]
@@ -43,6 +43,9 @@ emission = Color(0.756863, 0.756863, 0.756863, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_gxnkb"]
 font_size = 21
+
+[sub_resource type="LabelSettings" id="LabelSettings_sr6r1"]
+font_size = 24
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_fvv8t")
@@ -138,3 +141,4 @@ offset_right = 142.5
 offset_bottom = 23.0
 grow_horizontal = 2
 text = "Scene 2 - Sun moves in a straight line"
+label_settings = SubResource("LabelSettings_sr6r1")

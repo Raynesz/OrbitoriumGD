@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c3ee7h7fnguqb"]
+[gd_scene load_steps=18 format=3 uid="uid://c3ee7h7fnguqb"]
 
 [ext_resource type="Script" path="res://assets/scripts/Scene.cs" id="1_pi136"]
 [ext_resource type="Script" path="res://assets/scripts/FreeLookCamera.cs" id="2_flh2h"]
@@ -41,6 +41,9 @@ emission = Color(1, 1, 1, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_gxnkb"]
 font_size = 21
+
+[sub_resource type="LabelSettings" id="LabelSettings_03mav"]
+font_size = 24
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_pi136")
@@ -137,3 +140,4 @@ offset_right = 118.0
 offset_bottom = 23.0
 grow_horizontal = 2
 text = "Scene 1 - Sun travels in a circle"
+label_settings = SubResource("LabelSettings_03mav")
